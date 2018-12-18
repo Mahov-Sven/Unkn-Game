@@ -2,7 +2,7 @@
 	"name": "unkn-game",
 	"version": "0.1.0",
 	"description": "Nethack based multiplayer game",
-	"main": "./app/main.js",
+	"main": "./app/App.js",
 	"scripts": {
 		"start": "electron .",
 		"test": "./test/test.js"

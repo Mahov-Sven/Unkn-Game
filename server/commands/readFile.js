@@ -52,7 +52,7 @@ module.exports = class ReadFile extends AbstractCommand {
 		if(!optionResult.success) return optionResult;
 		let [path, name] = optionResult.data;
 		if(path === undefined) path = "";
-		if(name === undefined) name = "index.html";
+		if(name === undefined) name = "Index.html";
 
 		Logger.log("ReadFile", "File requested");
 		const fileResult = await this._execute(path, name, resource);

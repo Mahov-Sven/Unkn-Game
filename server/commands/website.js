@@ -13,7 +13,7 @@ module.exports = class Website extends AbstractCommand {
 	}
 
 	async _execute(resource){
-		const fileResult = await File.readWebFile("html/index.html");
+		const fileResult = await File.readWebFile("html/Main.html");
 		if(fileResult.success) {
 			resource.writeHead(200, {'Content-Type': 'text/html'});
 			resource.write(fileResult.data);

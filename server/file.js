@@ -33,7 +33,8 @@ module.exports = class File {
 	}
 
 	static readWebFile(fileName){
-		const fullFilePath = Path.join(rootDir, "app", "website", fileName);
+		console.log(rootDir);
+		const fullFilePath = Path.join(rootDir, "website", fileName);
 		return this._readFile(fullFilePath, fileName);
 	}
 
