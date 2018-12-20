@@ -9,8 +9,6 @@ global.collections = {
 	tokens: "tokens",
 }
 */
-global.loggerTitleSize = 10;
-global.loggerHeadingSize = 16;
 
 // ===============================================
 // 					  Commands

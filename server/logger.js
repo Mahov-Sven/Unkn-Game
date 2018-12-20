@@ -1,22 +1,25 @@
-var exports = module.exports = {};
+module.exports = class Logger {
 
-exports.log = function(header, message){
-	console.log(constructMessage("INFO", header, message));
+	static log(header, message){
+		console.log(Logger._constructMessage("INFO", header), message);
+	}
+	
+	static warn(header, message){
+		console.warn(Logger._constructMessage("WARNING", header), message);
+	}
+	
+	static err(header, error){
+		console.error(Logger._constructMessage("ERROR", header), error.stack);
+	}
+
+	static _constructMessage(title, header, message){
+		return "[" + title +"] "  + strRepeat(" ", module.exports.titleSize - 3 - title.length)
+			+ header + ": " + strRepeat(" ", module.exports.headingSize - 2 - header.length);
+	}
 }
 
-exports.warn = function(header, message){
-	console.warn(constructMessage("WARNING", header, message));
-}
-
-exports.err = function(header, error){
-	console.error(constructMessage("ERROR", header, error.stack));
-}
-
-function constructMessage(title, header, message){
-	return "[" + title +"] "  + strRepeat(" ", global.loggerTitleSize - 3 - title.length)
-		+ header + ": " + strRepeat(" ", global.loggerHeadingSize - 2 - header.length)
-		+ message;
-}
+module.exports.titleSize = 10;
+module.exports.headingSize = 16;
 
 function strRepeat(str, times){
 	let output = "";

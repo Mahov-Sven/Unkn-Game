@@ -3,6 +3,7 @@ const Protocol = require("electron").protocol;
 
 const Window = require("./Window");
 const File = require("../server/File");
+const Logger = require("../server/Logger.js");
 
 module.exports.App = class App {
 
@@ -15,19 +16,22 @@ module.exports.App = class App {
 
 	static init(){
 		Protocol.registerBufferProtocol("js", (request, callback) => {
-			const requestURL = File.removePathEscapes(request.url.replace("js://", "").replace(/^scripts[\//]scripts/, "scripts"));
+			const requestURL = File.removePathEscapes(request.url.replace("js://", "").replace(/^website[\//]/, ""));
 			const result = File.readWebFile(requestURL);
 			if(result.success) callback({mimeType: "text/javascript", data: result.data});
-			else callback({mimeType: "text/plain", data: result});
+			else {
+				callback({mimeType: "text/plain", data: result});
+				Logger.warn("App", result.devMessage);
+			}
 		});
 
-		const fileResult = File.readWebFile("html/Main.html");
+		const fileResult = File.readWebFile("Main.html");
 		if(!fileResult.success) throw new Error("Could not find/read website main html file");
 
 		const fileContent = fileResult.data.toString();
 		const searchRegex = /src="(([\w]+\/)*(Main.js))"/;
 		const fileResultArr = searchRegex.exec(fileContent);
-		const jsProtocolMainSrc = `src="js://${fileResultArr[1]}"`;
+		const jsProtocolMainSrc = `src="js://website/${fileResultArr[1]}"`;
 		const jsProtocolMainFileContent = fileContent.replace(searchRegex, jsProtocolMainSrc);
 		File.writeFile("website/App.html", jsProtocolMainFileContent);
 

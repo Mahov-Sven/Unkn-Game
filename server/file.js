@@ -1,8 +1,8 @@
 const FileSystem = require("fs");
 const Path = require("path")
 
-const Logger = require("./logger");
-const Result = require("./result").Result;
+const Logger = require("./Logger");
+const Result = require("./Result");
 
 const rootDir = Path.join(__dirname, "..");
 
@@ -33,7 +33,6 @@ module.exports = class File {
 	}
 
 	static readWebFile(fileName){
-		console.log(rootDir);
 		const fullFilePath = Path.join(rootDir, "website", fileName);
 		return this._readFile(fullFilePath, fileName);
 	}

@@ -1,6 +1,4 @@
-var exports = module.exports = {};
-
-class Result {
+module.exports = class Result {
 
 	constructor(success, data={}, userMessage=undefined, devMessage=undefined){
 		this.success = success;
@@ -9,5 +7,3 @@ class Result {
 		this.devMessage = devMessage;
 	}
 }
-
-exports.Result = Result;

@@ -1,11 +1,11 @@
-const Http = require("http")
-const Path = require("path")
-const Url = require("url")
+const Http = require("http");
+const Path = require("path");
+const Url = require("url");
 
-const Globals = require("./globals")
-const Result = require("./result").Result
-const Logger = require("./logger")
-const QueryError = require("./queryError").QueryError
+const Globals = require("./globals");
+const Result = require("./Result");
+const Logger = require("./Logger");
+const QueryError = require("./QueryError");
 
 module.exports = class Server {
 

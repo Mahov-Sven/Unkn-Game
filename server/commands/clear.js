@@ -1,12 +1,10 @@
-var exports = module.exports = {};
+const Logger = require("../Logger");
+const Result = require("../Result");
+const AbstractCommand = require("./AbstractCommand");
 
-const Logger = require("../logger")
-const Result = require("../result").Result
-const CommandI = require("./commandI").CommandI;
+const Database = require("../Database");
 
-const Database = require("../database").Database;
-
-class Clear extends CommandI {
+module.exports = class Clear extends AbstractCommand {
 
 	constructor(){
 		super();
@@ -40,5 +38,3 @@ class Clear extends CommandI {
 		);
 	}
 }
-
-exports.Command = Clear;

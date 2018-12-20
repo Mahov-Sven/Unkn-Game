@@ -19,7 +19,8 @@ module.exports = class Window {
 	 * Opens the window
 	 */
 	open(){
-		this._browserWindow = new BrowserWindow({show: false});
+		this._browserWindow = new BrowserWindow({show: false, webPreferences: {nodeIntegration: false} });
+		this._browserWindow.node
 		this._browserWindow.setSize(this._width, this._height);
 		this._browserWindow.loadFile(this._index);
 		this._browserWindow.webContents.openDevTools();

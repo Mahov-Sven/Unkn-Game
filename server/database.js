@@ -1,12 +1,9 @@
-var exports = module.exports = {};
+const Logger = require("./Loger");
+const Result = require("./Result");
+const DatabaseError = require("./DatabaseError");
+const File = require("./File");
 
-const Timer = require("./timer").Timer
-const Logger = require("./logger")
-const Result = require("./result").Result
-const DatabaseError = require("./databaseError").DatabaseError
-const File = require("./file").File
-
-class Database {
+module.exports = class Database {
 
 	constructor(){}
 
@@ -64,5 +61,3 @@ class Database {
 		return new Result(result.success);
 	}
 }
-
-exports.Database = Database;

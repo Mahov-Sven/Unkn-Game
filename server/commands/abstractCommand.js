@@ -1,7 +1,7 @@
-const Logger = require("../logger");
-const Result = require("../result").Result;
+const Logger = require("../Logger");
+const Result = require("../Result");
 
-module.exports = class CommandI {
+module.exports = class AbstractCommand {
 
 	constructor(){
 		this.name = this.constructor.name[0].toLowerCase() + this.constructor.name.substring(1);

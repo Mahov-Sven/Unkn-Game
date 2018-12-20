@@ -1,8 +1,8 @@
-const Logger = require("../logger")
-const Result = require("../result").Result
-const AbstractCommand = require("./abstractCommand")
+const Logger = require("../Logger");
+const Result = require("../Result");
+const AbstractCommand = require("./AbstractCommand");
 
-const File = require("../file");
+const File = require("../File");
 
 module.exports = class ReadFile extends AbstractCommand {
 
