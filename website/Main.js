@@ -4,8 +4,8 @@ export default class Main {
 	
 	static async main_(){
 		$("#Content");
-		const MainMenu = await Loader.loadFragment_("MainMenu");
-		MainMenu.attatch();
+		const mainMenu = await Loader.loadFragment_("MainMenu");
+		mainMenu.attach();
 	}
 }
 

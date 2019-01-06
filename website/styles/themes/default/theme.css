@@ -1,0 +1,16 @@
+.Text {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 2pt 4pt;
+	margin: 0 4pt;
+}
+
+/** -Flipcard **/
+.FlipcardFront,
+.FlipcardBack {
+	border-image-source: url("/resources/components/FlipcardBorder.png");
+	border-image-slice: 16 fill;
+	border-image-width: 16px;
+	border-image-outset: 16px;
+	border-image-repeat: round;
+	image-rendering: pixelated;
+}

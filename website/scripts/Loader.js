@@ -13,11 +13,11 @@ export default class Loader {
 		style.type = "text/css";
 		style.href = location;
 		style.id = `${id}-CSS`
-		return style;
+		return $(style);
 	}
 	
 	static async loadHTML_(location){
-		return await Loader.loadFile_(location);
+		return $(await Loader.loadFile_(location));
 	}
 	
 	static async loadJS_(location, id){
@@ -25,7 +25,7 @@ export default class Loader {
 		script.type = "module";
 		script.id = `${id}-JavaScript`;
 		script.src = location;
-		return script;
+		return $(script);
 	}
 	
 	static async loadFragment_(path, name){
