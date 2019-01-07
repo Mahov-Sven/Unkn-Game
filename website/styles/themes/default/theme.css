@@ -7,7 +7,7 @@
 /** -Flipcard **/
 .FlipcardFront,
 .FlipcardBack {
-	border-image-source: url("/resources/components/FlipcardBorder.png");
+	border-image-source: url("resources/components/FlipcardBorder.png");
 	border-image-slice: 16 fill;
 	border-image-width: 64px;
 	border-image-outset: 64px;

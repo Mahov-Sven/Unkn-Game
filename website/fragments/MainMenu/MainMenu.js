@@ -16,7 +16,11 @@ export default class MainMenu extends AbstractFragment {
 
 		const options = {
 			"Play": await Loader.loadHTML_(`${this.fullPath}Play.html`),
+			"Profile": await Loader.loadHTML_(`${this.fullPath}Profile.html`),
 			"Unlocks": await Loader.loadHTML_(`${this.fullPath}Unlocks.html`),
+			"Stats": await Loader.loadHTML_(`${this.fullPath}Stats.html`),
+			"Settings": await Loader.loadHTML_(`${this.fullPath}Settings.html`),
+			"Credits": await Loader.loadHTML_(`${this.fullPath}Credits.html`),
 		};
 
 		this.cache.flipmenu = new Flipmenu(`${this.name}-`, options);

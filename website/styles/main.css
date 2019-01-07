@@ -64,7 +64,7 @@ body {
 		height 0s 0.15s;
 }
 
-.Flipcard.Active{
+.Flipcard.Active {
 	transform: rotateY(180deg);
 }
 
@@ -74,8 +74,8 @@ body {
 	overflow: hidden;
 }
 
-.FlipcardFront{}
+.FlipcardFront {}
 
-.FlipcardBack{
+.FlipcardBack {
 	transform: rotateY(180deg);
 }
