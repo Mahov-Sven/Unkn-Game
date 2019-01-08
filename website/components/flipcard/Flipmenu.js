@@ -1,5 +1,6 @@
 import Flipcard from "./Flipcard.js";
-import Component from "./Component.js";
+import Component from "../Component.js";
+import AbstractFragment from "../../fragments/AbstractFragment.js";
 
 export default class Flipmenu extends Flipcard{
 	constructor(...args){
@@ -11,6 +12,7 @@ export default class Flipmenu extends Flipcard{
 
 		this.id = id;
 		this.options = options;
+		this.front;
 		this.back;
 	}
 
@@ -21,50 +23,57 @@ export default class Flipmenu extends Flipcard{
 	}
 
 	_constructFront(){
-		const frontContainer = Component.div();
+		const frontContainer = new Component();
 		frontContainer.addClass("FlipcardFront");
 		frontContainer.addClass("FlipcardFace");
 		frontContainer.addClass("FlexStatic");
 		frontContainer.addClass("FlexColumn");
 
 		for(const optionName in this.options){
-			const option = Component.div();
+			const option = new Component();
+			option.addClass("ButtonText");
+			option.addClass("Button");
 			option.addClass("Text");
 			option.text(optionName);
-			option.attr("id", `${this.id}Option${optionName}`);
+			option.id(`${this.id}Option${optionName}`);
 
 			frontContainer.append(option);
 		}
 
-		this.elem.append(frontContainer);
+		this.front = frontContainer;
+		this.append(frontContainer);
 	}
 
 	_constructBack(){
-		const backContainer = Component.div();
+		const backContainer = new Component();
 		backContainer.addClass("FlipcardBack");
 		backContainer.addClass("FlipcardFace");
 		backContainer.addClass("FlexStatic");
 		backContainer.addClass("FlexColumn");
 
 		this.back = backContainer;
-		this.elem.append(backContainer);
+		this.append(backContainer);
 	}
 
 	_assignBackElem(optionName){
-		this.back.empty();
+		this.back.clear();
 
-		const optionContainer = Component.div();
+		const optionContainer = new Component();
 		optionContainer.addClass("FlexStatic");
 		optionContainer.addClass("FlexColumn");
 
-		const optionElem = this.options[optionName];
+		const option = this.options[optionName];
+		const optionElem = (option instanceof AbstractFragment) ? option.cache.comp : option;
 		optionElem.addClass("FlexStatic");
-		optionElem.attr("id", `${this.id}${optionName}`);
+		optionElem.id(`${this.id}${optionName}`);
 
-		const optionBack = Component.div();
+		const optionBack = new Component();
 		optionBack.addClass("FlexStatic");
+		optionBack.addClass("ButtonText");
+		optionBack.addClass("Button");
+		optionBack.addClass("Text");
 		optionBack.text("Back");
-		optionBack.attr("id", `${this.id}${optionName}Back`);
+		optionBack.id(`${this.id}${optionName}Back`);
 		optionBack.click(() => this.flip());
 
 		optionContainer.append(optionElem);
@@ -77,21 +86,25 @@ export default class Flipmenu extends Flipcard{
 		super.attachEvents();
 		
 		for(const optionName in this.options){
-			$(`#${this.id}Option${optionName}`).click(() => {
+			new Component(`${this.id}Option${optionName}`).click(() => {
+				const option = this.options[optionName];
 				this._assignBackElem(optionName);
+				if(option instanceof AbstractFragment)
+					option.attachEvents();
+				
 				this.flip();
 			});
 		}
 	}
 
 	addOption(optionName){
-		const option = Component.div();
+		const option = new Component();
 		option.addClass("FlexStatic");
 		option.addClass("Text");
 		option.text(optionName);
-		option.attr("id", `${this.id}Option${optionName}`);
+		option.id(`${this.id}Option${optionName}`);
 
-		this.elem.children().eq(0).append(option);
+		this.front.append(option);
 		return option;
 	}
 }

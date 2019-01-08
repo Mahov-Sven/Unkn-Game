@@ -8,34 +8,38 @@ export default class AbstractFragment {
 		this.id = this.name;
 		this.location;
 		this.cache = {};
-		this.cache.elem;
+		this.cache.comp;
 		this.cache.style;
 	}
 
 	async _loadCSS_(){
-		this.cache.style = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
+		this.cache.comp = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
 	}
 
 	async _loadHTML_(){
-		this.cache.elem = await Loader.loadHTML_(`${this.fullPath}${this.name}.html`);
+		this.cache.comp = await Loader.loadHTML_(`${this.fullPath}${this.name}.html`);
 	}
 
 	async load_(){
 		await this._loadCSS_();
-		if(this.cache.style !== undefined) this.cache.style.attr("id", `${this.id}-CSS`);
+		if(this.cache.style !== undefined) this.cache.style.id(`${this.id}-CSS`);
 		
 		await this._loadHTML_();
-		if(this.cache.elem !== undefined) this.cache.elem.attr("id", `${this.id}`);
+		if(this.cache.comp !== undefined) this.cache.comp.id(`${this.id}`);
 	}
 
 	attach(){
 		if(this.cache.style !== undefined)
-			document.head.appendChild(this.cache.style);
+			document.head.appendChild(this.cache.style.elem());
 		//$(`#${this.location}`).empty();
-		if(this.cache.elem !== undefined)
-			$(`#${this.location}`).append(this.cache.elem);
+		if(this.cache.comp !== undefined)
+			$(`#${this.location}`).append(this.cache.comp.elem());
 
 		this.attachEvents();
+	}
+
+	elem(){
+		return this.cache.comp.elem();
 	}
 
 	attachEvents(){}
