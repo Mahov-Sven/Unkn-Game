@@ -13,7 +13,7 @@ export default class AbstractFragment {
 	}
 
 	async _loadCSS_(){
-		this.cache.comp = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
+		this.cache.style = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
 	}
 
 	async _loadHTML_(){

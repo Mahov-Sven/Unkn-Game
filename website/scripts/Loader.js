@@ -2,11 +2,7 @@ import Component from "../components/Component.js";
 
 export default class Loader {
 	static async loadFile_(location){
-		return new Promise((resolve, reject) => {
-			$.get(location, function(file) {
-				resolve(file)
-			});
-		});
+		return await $.get_(location);
 	}
 	
 	static async loadCSS_(location, id){
@@ -15,11 +11,11 @@ export default class Loader {
 		style.type = "text/css";
 		style.href = location;
 		style.id = `${id}-CSS`
-		return new Component($(style));
+		return new Component(style);
 	}
 	
 	static async loadHTML_(location){
-		return new Component($(await Loader.loadFile_(location)));
+		return Component.parse(await Loader.loadFile_(location));
 	}
 	
 	static async loadJS_(location, id){
@@ -27,7 +23,7 @@ export default class Loader {
 		script.type = "module";
 		script.id = `${id}-JavaScript`;
 		script.src = location;
-		return new Component($(script));
+		return new Component(script);
 	}
 	
 	static async loadFragment_(path, name){

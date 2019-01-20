@@ -1,13 +1,13 @@
 import AbstractFragment from "../AbstractFragment.js";
 import Loader from "../../scripts/Loader.js";
-import Flipmenu from "../../components/flipcard/Flipmenu.js";
 import Component from "../../components/Component.js";
+import ExpandingMenu from "../../components/menu/ExpandingMenu.js";
 
 export default class MainMenu extends AbstractFragment {
 	constructor(){
 		super();
 		this.location = "Content";
-		this.cache.flipmenu;
+		this.cache.menu;
 		this.cache.fragments = [];
 	}
 
@@ -28,8 +28,10 @@ export default class MainMenu extends AbstractFragment {
 			"Credits": await Loader.loadHTML_(`${this.fullPath}Credits.html`),
 		};
 
-		this.cache.flipmenu = new Flipmenu(`${this.name}-`, options);
-		const quit = this.cache.flipmenu.addOption("Quit");
+		this.cache.menu = new ExpandingMenu(`${this.name}-`, options);
+		this.cache.menu.allowScrollY(1);
+
+		const quit = this.cache.menu.addOption("Quit");
 		quit.addClass("ButtonText");
 		quit.addClass("Button");
 
@@ -37,12 +39,12 @@ export default class MainMenu extends AbstractFragment {
 		root.addClass("FlexColumn");
 		root.addClass("FlexCenter");
 		root.addClass("FullContainer");
-		root.append(this.cache.flipmenu);
+		root.append(this.cache.menu);
 
 		this.cache.comp = root;
 	}
 
 	attachEvents(){
-		this.cache.flipmenu.attachEvents();
+		this.cache.menu.attachEvents();
 	}
 }

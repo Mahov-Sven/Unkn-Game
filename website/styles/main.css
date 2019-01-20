@@ -1,7 +1,8 @@
 html {
 	width: 100%;
 	height: 100%;
-	font-size: 24px;
+	font-size: 16px;
+	overflow: hidden;
 }
 
 body {
@@ -25,17 +26,12 @@ body {
 	perspective: 1000px;
 }
 
-/** -Button */
-.Button {
-	user-select: none;
-	cursor: pointer;
-}
+/** -Scroll */
+.AllowScroll.X { overflow-x: auto; }
+.AllowScroll.Y { overflow-y: auto; }
 
-.ButtonText {
-	transition: margin 0.1s;
-}
-
-.Button {}
+.Scroll.X { overflow-x: scroll; }
+.Scroll.Y { overflow-y: scroll; }
 
 /** -Flexbox */
 .FlexRow {
@@ -63,32 +59,45 @@ body {
 	justify-content: center;
 }
 
+/** -Button */
+.Button {
+	user-select: none;
+	cursor: pointer;
+}
+
+.ButtonText {
+	transition: margin 0.1s;
+}
+
+.Button {}
+
 /** -Flipcard **/
 .Flipcard {
-	position: relative;
 	transform-style: preserve-3d;
 }
 
-.Flipcard.Transition {
-	transition:
-		transform 0.3s linear,
-		width 0s 0.15s,
-		height 0s 0.15s;
+.Flipcard.Front {
+	transform: rotateY(0deg);
 }
 
-.Flipcard.Active {
-	transform: rotateY(180deg);
+.Flipcard.Back {
+	transform: rotateY(360deg);
 }
 
-.FlipcardFace {
-	position: absolute;
-	backface-visibility: hidden;
-	overflow: hidden;
+.Flipcard.Mid {
+	transform: rotateY(90deg);
 }
 
-.FlipcardFront {}
+.Flipcard.FrontSpeed {
+	transition: transform 50ms linear;
+}
 
-.FlipcardBack {
-	transform: rotateY(180deg);
-	overflow-y: auto;
+.Flipcard.BackSpeed {
+	transition: transform 200ms linear;
+}
+
+/** -ExpandingMenu */
+.ExpandingMenu {
+	transition: 
+		max-width 2500ms linear;
 }

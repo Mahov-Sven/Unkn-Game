@@ -21,20 +21,35 @@
 /** -Button */
 .ButtonText:hover {
 	margin: 0 0 0 8px;
-	color: var(--blessed);
 }
 
-/** -Flipcard **/
-.Flipcard {
-	margin: 32px;
-}
-
-.FlipcardFront,
-.FlipcardBack {
-	border-image-source: url("resources/components/FlipcardBorder.png");
-	border-image-slice: 16 fill;
-	border-image-width: 64px;
-	border-image-outset: 64px;
+/** -Flipcard -ExpandingMenu **/
+.Flipcard,
+.ExpandingMenu {
+	border: black double 32px;
+	border-image-source: url("resources/components/FlipcardBorder_0.png");
+	border-image-slice: 8 fill;
+	border-image-width: 32px;
 	border-image-repeat: repeat;
 	image-rendering: pixelated;
+}
+
+.Flipcard.Type0,
+.ExpandingMenu.Type0 {
+	border-image-source: url("resources/components/FlipcardBorder_0.png");
+}
+
+.Flipcard.Type1,
+.ExpandingMenu.Type1 {
+	border-image-source: url("resources/components/FlipcardBorder_1.png");
+}
+
+.Flipcard.Type2,
+.ExpandingMenu.Type2 {
+	border-image-source: url("resources/components/FlipcardBorder_2.png");
+}
+
+.Flipcard.Type3,
+.ExpandingMenu.Type3 {
+	border-image-source: url("resources/components/FlipcardBorder_3.png");
 }

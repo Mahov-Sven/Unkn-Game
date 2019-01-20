@@ -1,3 +1,4 @@
+import * as Util from "./scripts/Util.js"
 import Loader from "./scripts/Loader.js"
 
 export default class Main {

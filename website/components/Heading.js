@@ -1,6 +1,6 @@
 import Component from "./Component.js";
 
-export default class Flipcard extends Component{
+export default class Heading extends Component{
 	constructor(...args){
 		super(...args);
 	}
