@@ -1,7 +1,8 @@
 import Component from "../Component.js";
 import AbstractFragment from "../../fragments/AbstractFragment.js";
+import Card from "../card/Card.js"
 
-export default class ExpandingMenu extends Component {
+export default class ExpandingMenu extends Card {
 	constructor(...args){
 		super(...args);
 	}
@@ -25,7 +26,7 @@ export default class ExpandingMenu extends Component {
 	}
 
 	_constructRoot(){
-		this._create();
+		super._constructRoot();
 		this.addClass("ExpandingMenu");
 	}
 

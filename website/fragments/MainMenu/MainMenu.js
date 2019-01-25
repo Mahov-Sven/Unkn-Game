@@ -19,9 +19,9 @@ export default class MainMenu extends AbstractFragment {
 		//this.cache.fragments.push(unlocks);
 
 		const options = {
-			"Play": await Loader.loadHTML_(`${this.fullPath}Play.html`),
+			"Play": await Loader.loadFragment_("MainMenu/", "Play"),
 			"Profile": await Loader.loadHTML_(`${this.fullPath}Profile.html`),
-			"Unlocks": await Loader.loadFragment_("Unlocks"),
+			"Unlocks": await Loader.loadFragment_("MainMenu/", "Unlocks"),
 			"Manual": await Loader.loadHTML_(`${this.fullPath}Manual.html`),
 			"Stats": await Loader.loadHTML_(`${this.fullPath}Stats.html`),
 			"Settings": await Loader.loadHTML_(`${this.fullPath}Settings.html`),
@@ -29,7 +29,7 @@ export default class MainMenu extends AbstractFragment {
 		};
 
 		this.cache.menu = new ExpandingMenu(`${this.name}-`, options);
-		this.cache.menu.allowScrollY(1);
+		this.cache.menu.allowScrollY();
 
 		const quit = this.cache.menu.addOption("Quit");
 		quit.addClass("ButtonText");

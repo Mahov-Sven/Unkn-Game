@@ -1,13 +1,13 @@
-import AbstractFragment from "../AbstractFragment.js";
-import Loader from "../../scripts/Loader.js";
-import Component from "../../components/Component.js";
-import Flipcard from "../../components/Flipcard.js";
-import Heading from "../../components/Heading.js";
-import Paragraph from "../../components/Paragraph.js";
+import AbstractFragment from "../../AbstractFragment.js";
+import Loader from "../../../scripts/Loader.js";
+import Component from "../../../components/Component.js";
+import Flipcard from "../../../components/card/Flipcard.js";
+import Heading from "../../../components/Heading.js";
+import Paragraph from "../../../components/Paragraph.js";
 
 export default class Unlocks extends AbstractFragment {
-	constructor(){
-		super();
+	constructor(...args){
+		super(...args);
 		this.flipcards = [];
 	}
 

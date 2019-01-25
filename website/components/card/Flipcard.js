@@ -1,6 +1,7 @@
-import Component from "./Component.js";
+import Component from "../Component.js";
+import Card from "./Card.js";
 
-export default class Flipcard extends Component{
+export default class Flipcard extends Card {
 	constructor(...args){
 		super(...args);
 	}
@@ -8,8 +9,6 @@ export default class Flipcard extends Component{
 	init(){
 		super.init();
 		this._side = 0;
-		this._ratio; // w/h
-		this._size;
 		this._front;
 		this._back;
 	}
@@ -24,7 +23,7 @@ export default class Flipcard extends Component{
 	}
 
 	_constructRoot(){
-		this._create();
+		super._constructRoot();
 		this.addClass("Flipcard");
 		this.addClass("Front");
 	}
@@ -52,15 +51,6 @@ export default class Flipcard extends Component{
 
 		backContainer.append(backElem);
 		this._back = backContainer;
-	}
-
-	_resize(){
-		if(this._size !== undefined && this._ratio !== undefined){
-			const w = this._size * this._ratio;
-			const h = this._size;
-			this.width(w);
-			this.height(h);
-		}
 	}
 
 	attachEvents(){
@@ -121,12 +111,6 @@ export default class Flipcard extends Component{
 		if(eventName === "click") this.addClass("Button");
 	}
 
-	ratio(width, height){
-		if(height === undefined) this._ratio = width;
-		else this._ratio = width / height;
-		this._resize();
-	}
-
 	scrollX(side){
 		if(side === undefined || side === 0)
 			this._front.scrollX();
@@ -139,11 +123,6 @@ export default class Flipcard extends Component{
 			this._front.scrollY();
 		if(side === undefined || side === 1)
 			this._back.scrollY();
-	}
-
-	size(size){
-		this._size = size;
-		this._resize();
 	}
 
 	sideElem(side){

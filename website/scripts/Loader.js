@@ -31,7 +31,7 @@ export default class Loader {
 			name = path;
 			path = "";
 		}
-		const fragment = new ((await import(`./../fragments/${path}${name}/${name}.js`)).default)();
+		const fragment = new ((await import(`./../fragments/${path}${name}/${name}.js`)).default)(path, name);
 		await fragment.load_();
 		return fragment;
 	}

@@ -1,9 +1,9 @@
 import Loader from "../scripts/Loader.js";
 
 export default class AbstractFragment {
-	constructor(){
-		this.name = this.constructor.name;
-		this.path = "";
+	constructor(path, name){
+		this.name = name || this.constructor.name;
+		this.path = path || "";
 		this.fullPath = `fragments/${this.path}${this.name}/`;
 		this.id = this.name;
 		this.location;
