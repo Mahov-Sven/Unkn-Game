@@ -12,6 +12,7 @@ export default class MainMenu extends AbstractFragment {
 
 	async _loadHTML_(){
 		const root = new Component();
+		root.id(this.componentId("Background"))
 		root.flex("row", "static");
 		root.full();
 

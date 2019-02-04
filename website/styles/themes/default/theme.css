@@ -42,3 +42,11 @@
 .Card.Type3 {
 	border-image-source: url("resources/components/FlipcardBorder_3.png");
 }
+
+/* -MainMenu */
+#MainMenu {
+	background-image: url("resources/fragments/MainMenuBackground.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
