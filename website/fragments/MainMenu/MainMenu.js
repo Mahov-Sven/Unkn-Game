@@ -1,50 +1,38 @@
 import AbstractFragment from "../AbstractFragment.js";
-import Loader from "../../scripts/Loader.js";
+import Heading from "../../components/Heading.js"
 import Component from "../../components/Component.js";
-import ExpandingMenu from "../../components/menu/ExpandingMenu.js";
 
 export default class MainMenu extends AbstractFragment {
 	constructor(){
 		super();
 		this.location = "Content";
-		this.cache.menu;
-		this.cache.fragments = [];
 	}
 
 	async _loadCSS_(){}
 
 	async _loadHTML_(){
+		const root = new Component();
+		root.flex("row", "static");
+		root.full();
 
-		//const unlocks = await Loader.loadFragment_("Unlocks");
-		//this.cache.fragments.push(unlocks);
+		const menu = new Component();
+		menu.id(this.componentId("Menu"));
+		menu.flex("column", "static");
+		menu.css("background-color", "#00000066");
+		menu.css("margin-right", "2rem");
+		menu.width("10rem");
+		menu.font("center");
+		menu.text("PLAY");
 
-		const options = {
-			"Play": await Loader.loadFragment_("MainMenu/", "Play"),
-			"Profile": await Loader.loadHTML_(`${this.fullPath}Profile.html`),
-			"Unlocks": await Loader.loadFragment_("MainMenu/", "Unlocks"),
-			"Manual": await Loader.loadHTML_(`${this.fullPath}Manual.html`),
-			"Stats": await Loader.loadHTML_(`${this.fullPath}Stats.html`),
-			"Settings": await Loader.loadHTML_(`${this.fullPath}Settings.html`),
-			"Credits": await Loader.loadHTML_(`${this.fullPath}Credits.html`),
-		};
+		const menuSpace = new Component();
+		menuSpace.id(this.componentId("MenuSpace"));
+		menuSpace.flex("column", "dynamic");
+		menuSpace.style("background-color: #00000066; margin: 2rem;");
 
-		this.cache.menu = new ExpandingMenu(`${this.name}-`, options);
-		this.cache.menu.allowScrollY();
-
-		const quit = this.cache.menu.addOption("Quit");
-		quit.addClass("ButtonText");
-		quit.addClass("Button");
-
-		const root = new Component()
-		root.addClass("FlexColumn");
-		root.addClass("FlexCenter");
-		root.addClass("FullContainer");
-		root.append(this.cache.menu);
-
-		this.cache.comp = root;
+		root.append(menuSpace);
+		root.append(menu);
+		this.component = root;
 	}
 
-	attachEvents(){
-		this.cache.menu.attachEvents();
-	}
+	attachEvents(){}
 }

@@ -11,8 +11,7 @@ export default class Heading extends Component{
 
 	_constructRoot(title){
 		this._create();
-		this.addClass("Heading");
-		this.addClass("Text");
+		this.font("heading");
 		this.text(title);
 	}
 }

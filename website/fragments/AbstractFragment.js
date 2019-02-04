@@ -1,4 +1,5 @@
 import Loader from "../scripts/Loader.js";
+import Component from "../components/Component.js"
 
 export default class AbstractFragment {
 	constructor(path, name){
@@ -7,39 +8,40 @@ export default class AbstractFragment {
 		this.fullPath = `fragments/${this.path}${this.name}/`;
 		this.id = this.name;
 		this.location;
-		this.cache = {};
-		this.cache.comp;
-		this.cache.style;
+		/** @type Component */
+		this.component;
+		/** @type Component */
+		this.style;
 	}
 
 	async _loadCSS_(){
-		this.cache.style = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
+		this.style = await Loader.loadCSS_(`${this.fullPath}${this.name}.css`, this.id);
 	}
 
 	async _loadHTML_(){
-		this.cache.comp = await Loader.loadHTML_(`${this.fullPath}${this.name}.html`);
+		this.component = await Loader.loadHTML_(`${this.fullPath}${this.name}.html`);
 	}
 
 	async load_(){
 		await this._loadCSS_();
-		if(this.cache.style !== undefined) this.cache.style.id(`${this.id}-CSS`);
+		if(this.style !== undefined) this.style.id(`${this.id}-CSS`);
 		
 		await this._loadHTML_();
-		if(this.cache.comp !== undefined) this.cache.comp.id(`${this.id}`);
+		if(this.component !== undefined) this.component.id(`${this.id}`);
 	}
 
 	attach(){
-		if(this.cache.style !== undefined)
-			document.head.appendChild(this.cache.style.elem());
+		if(this.style !== undefined)
+			document.head.appendChild(this.style.elem());
 		//$(`#${this.location}`).empty();
-		if(this.cache.comp !== undefined)
-			$(`#${this.location}`).append(this.cache.comp.elem());
+		if(this.component !== undefined)
+			$(`#${this.location}`).append(this.component.elem());
 
 		this.attachEvents();
 	}
 
 	elem(){
-		return this.cache.comp.elem();
+		return this.component.elem();
 	}
 
 	attachEvents(){}
@@ -52,5 +54,9 @@ export default class AbstractFragment {
 	clear(){
 		$(`#${this.id}-CSS`).remove();
 		$(`#${this.id}`).remove();
+	}
+
+	componentId(componentId){
+		return `${this.id}-${componentId}`;
 	}
 }

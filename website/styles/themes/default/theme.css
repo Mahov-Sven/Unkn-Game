@@ -1,8 +1,9 @@
 :root {
 	--blessed: #f1d800;
+	font-size: 16pt;
 }
 
-.Text {
+[font] {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	padding: 4px 8px;
 	margin: 0 4px;
@@ -10,19 +11,11 @@
 	white-space: normal;
 }
 
-.Header {
-	font-weight: bold;
-}
-
-.Title {
-	font-size: 32px;
-	font-weight: bold;
-}
+[font~="center"] { text-align: center; }
+[font~="heading"] { font-size: 1.5rem; font-weight: bold; }
+[font~="title"] { font-size: 2rem; font-weight: bold; }
 
 /** -Button */
-.ButtonText:hover {
-	margin: 0 0 0 8px;
-}
 
 /** -Card **/
 .Card {

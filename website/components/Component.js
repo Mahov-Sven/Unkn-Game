@@ -39,18 +39,10 @@ export default class Component {
 		this._elem.classList.add(className);
 	}
 
-	allowScrollX(){
-		this.addClass("AllowScroll");
-		this.addClass("X");
-	}
-
-	allowScrollY(){
-		this.addClass("AllowScroll");
-		this.addClass("Y");
-	}
-
-	attr(attrName, attrValue){
-		this._elem.setAttribute(attrName, attrValue);
+	attr(attrName, attrValue, add=false){
+		if(attrValue === undefined) return this._elem.getAttribute(attrName);
+		else if(!add) this._elem.setAttribute(attrName, attrValue);
+		else this._elem.setAttribute(attrName, `${this._elem.getAttribute(attrName)} ${attrValue}`);
 	}
 
 	clear(){
@@ -95,6 +87,33 @@ export default class Component {
 		return this._find(`#${id}`);
 	}
 
+	/**
+	 * Applies flex styles to the element. The following styles
+	 * are valid:
+	 * - row, column
+	 * - dynamic, static
+	 * - center
+	 * @param  {...any} args The styles to apply
+	 */
+	flex(...args){
+		this.attr("flex", args.join(" "));
+	}
+
+	/**
+	 * Applies the styling for text to the element. The following
+	 * styles are valid:
+	 * - center
+	 * - heading, title
+	 * @param  {...any} args The styles to apply
+	 */
+	font(...args){
+		this.attr("font", args.join(" "));
+	}
+
+	full(){
+		this.addClass("FullContainer");
+	}
+
 	height(height){
 		if(height === undefined) return this._elem.clientHeight;
 		else this.css("height", Component._toValidCSSQuantity(height));
@@ -125,13 +144,11 @@ export default class Component {
 	}
 
 	scrollX(){
-		this.addClass("Scroll");
-		this.addClass("X");
+		this.attr("scroll", "x", true);
 	}
 
 	scrollY(){
-		this.addClass("Scroll");
-		this.addClass("Y");
+		this.attr("scroll", "y", true);
 	}
 
 	style(value){

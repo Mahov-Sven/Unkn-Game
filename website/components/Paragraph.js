@@ -11,7 +11,7 @@ export default class Paragraph extends Component {
 
 	_constructRoot(title){
 		this._create();
-		this.addClass("Text");
+		this.font();
 		this.text(title);
 	}
 }
