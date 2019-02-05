@@ -12,6 +12,8 @@
 }
 
 [font~="center"] { text-align: center; }
+[font~="button"] { color: #bbbbbb; }
+[font~="button"]:hover { color: var(--blessed); font-weight: bold; }
 [font~="heading"] { font-size: 1.5rem; font-weight: bold; }
 [font~="title"] { font-size: 2rem; font-weight: bold; }
 
@@ -44,9 +46,19 @@
 }
 
 /* -MainMenu */
+@keyframes MainMenuBackgroundAnimation {
+	from { background-position: center center, 0 center, center center; }
+	to { background-position: center center, -1500px center, center center; }
+}
+
 #MainMenu {
-	background-image: url("resources/fragments/MainMenuBackground.png");
-	background-repeat: no-repeat;
-	background-position: center;
+	background-image:
+		url("resources/fragments/MainMenu/MainMenuBackground_2.png"),
+		url("resources/fragments/MainMenu/MainMenuBackground_1.png"),
+		url("resources/fragments/MainMenu/MainMenuBackground_0.png");
+	background-repeat: no-repeat, repeat, no-repeat;
+	background-position: center center, 0 center, center center;
 	background-size: cover;
+
+	animation: MainMenuBackgroundAnimation 60s linear infinite;
 }

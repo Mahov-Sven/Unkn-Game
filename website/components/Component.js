@@ -103,7 +103,7 @@ export default class Component {
 	 * Applies the styling for text to the element. The following
 	 * styles are valid:
 	 * - center
-	 * - heading, title
+	 * - button, heading, title
 	 * @param  {...any} args The styles to apply
 	 */
 	font(...args){
