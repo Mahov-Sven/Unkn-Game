@@ -1,5 +1,5 @@
 import Loader from "../scripts/Loader.js";
-import Component from "../components/Component.js"
+import Component from "../components/Component.js";
 
 export default class AbstractFragment {
 	constructor(path, name){

@@ -1,11 +1,13 @@
 import AbstractFragment from "../AbstractFragment.js";
-import Heading from "../../components/Heading.js"
 import Component from "../../components/Component.js";
+import Loader from "../../scripts/Loader.js";
 
 export default class MainMenu extends AbstractFragment {
-	constructor(){
-		super();
+	constructor(...args){
+		super(...args);
 		this.location = "Content";
+		/** @type {Object.<string, AbstractFragment>} */
+		this._menuFragments = {};
 	}
 
 	async _loadCSS_(){}
@@ -26,35 +28,79 @@ export default class MainMenu extends AbstractFragment {
 		const menuOptions = new Component();
 		menuOptions.flex("column","static");
 
-		const addOption = (name) => {
-			const option = new Component();
-			option.id(this.componentId(`Option${name}`));
-			option.text(name);
-			option.font("center", "button");
-			menuOptions.append(option);
-		}
-
-		addOption("PLAY");
-		addOption("PROFILE");
-		addOption("UNLOCKS");
-		addOption("STATS");
-		addOption("SETTINGS");
-		addOption("CREDITS");
-		addOption("QUIT");
+		this._addOption(menuOptions, "Play");
+		this._addOption(menuOptions, "Profile");
+		this._addOption(menuOptions, "Unlocks");
+		this._addOption(menuOptions, "Stats");
+		this._addOption(menuOptions, "Settings");
+		this._addOption(menuOptions, "Credits");
+		this._addOption(menuOptions, "Quit");
 
 		menu.append(menuOptions);
+
+		const menuSpaceContainer = new Component();
+		menuSpaceContainer.flex("column", "dynamic");
+		menuSpaceContainer.css("padding", "2rem");
 
 		const menuSpace = new Component();
 		menuSpace.id(this.componentId("MenuSpace"));
 		menuSpace.flex("column", "dynamic");
-		menuSpace.style("background-color: #000000bf; margin: 2rem;");
+		menuSpace.css("background-color","#000000bf");
+		menuSpace.hide();
 
-		root.append(menuSpace);
+		menuSpaceContainer.append(menuSpace);
+
+		root.append(menuSpaceContainer);
 		root.append(menu);
 		this.component = root;
 	}
 
 	attachEvents(){
-		
+		const menuContainer = this.component.child(0);
+		menuContainer.click((e) => menuContainer.child().hide());
+		menuContainer.child().click((e) => e.stopPropagation());
+
+		this._addOptionEvent("Play");
+		this._addOptionEvent("Profile");
+		this._addOptionEvent("Unlocks");
+		this._addOptionEvent("Stats");
+		this._addOptionEvent("Settings");
+		this._addOptionEvent("Credits");
+		this._addOptionEvent("Quit");
+	}
+
+	_addOption(comp, name){
+		const option = new Component();
+		option.id(this.componentId(`Option${name}`));
+		option.text(name.toUpperCase());
+		option.font("center", "button");
+		comp.append(option);
+	}
+
+	_addOptionEvent(name){
+		this.component
+				.findId(this.componentId(`Option${name}`))
+				.click(async (e) => {
+					const menu = this.component.findId(this.componentId("MenuSpace"));
+					const fragment = await this._menu_(name);
+					fragment.location = menu.id();
+					fragment.attach();
+					if(menu.attr("menu") === name) menu.toggle();
+					else {
+						menu.attr("menu", name);
+						menu.show();
+					}
+				});
+	}
+
+	/**
+	 * A fragment for the menu of the given name
+	 * @param {String} name
+	 * @returns {AbstractFragment} the menu fragment 
+	 */
+	async _menu_(name){
+		if(this._menuFragments[name] === undefined)
+			this._menuFragments[name] = await Loader.loadFragment_(`${this.id}/`, name);
+		return this._menuFragments[name];
 	}
 }

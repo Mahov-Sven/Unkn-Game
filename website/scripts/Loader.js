@@ -1,4 +1,5 @@
 import Component from "../components/Component.js";
+import AbstractFragment from "../fragments/AbstractFragment.js";
 
 export default class Loader {
 	static async loadFile_(location){
@@ -26,6 +27,12 @@ export default class Loader {
 		return new Component(script);
 	}
 	
+	/**
+	 * Load a fragment script file
+	 * @param {String} path 
+	 * @param {String} name 
+	 * @returns {AbstractFragment} the fragment scrip file
+	 */
 	static async loadFragment_(path, name){
 		if(name === undefined || name === ""){
 			name = path;

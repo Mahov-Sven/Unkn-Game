@@ -55,7 +55,7 @@ export default class Component {
 		this.on("click", event);
 	}
 
-	child(index){
+	child(index=0){
 		return new Component(this._elem.children[index]);
 	}
 
@@ -119,8 +119,12 @@ export default class Component {
 		else this.css("height", Component._toValidCSSQuantity(height));
 	}
 
+	hide(){
+		this.css("display", "none");
+	}
+
 	id(id){
-		this.attr("id", id);
+		return this.attr("id", id);
 	}
 
 	on(eventName, eventFunc){
@@ -151,12 +155,21 @@ export default class Component {
 		this.attr("scroll", "y", true);
 	}
 
+	show(){
+		this.css("display", "");
+	}
+
 	style(value){
 		this._elem.setAttribute("style", value);
 	}
 
 	text(txt){
 		this._elem.textContent = txt;
+	}
+
+	toggle(){
+		if(this._elem.style.display === "none") this.show();
+		else this.hide();
 	}
 
 	toggleClass(className){
