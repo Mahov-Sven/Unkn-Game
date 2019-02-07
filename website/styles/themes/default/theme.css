@@ -48,7 +48,7 @@
 /* -MainMenu */
 @keyframes MainMenuBackgroundAnimation {
 	from { background-position: center center, 0 center, center center; }
-	to { background-position: center center, -1600px center, center center; }
+	to { background-position: center center, -100vw center, center center; }
 }
 
 #MainMenu {
