@@ -9,6 +9,7 @@
 	margin: 0 4px;
 	user-select: none;
 	white-space: normal;
+	font-size: 1rem;
 }
 
 [font~="center"] { text-align: center; }
@@ -20,29 +21,37 @@
 /** -Button */
 
 /** -Card **/
-.Card {
-	border: black double 32px;
-	border-image-source: url("resources/components/FlipcardBorder_0.png");
+[card] {
+	border: black double 0.625rem;
+	border-image-source: url("resources/components/CardBorder0.png");
 	border-image-slice: 8 fill;
-	border-image-width: 32px;
+	border-image-width: 1rem;
 	border-image-repeat: repeat;
 	image-rendering: pixelated;
+	margin: 0.2rem;
+
+	height: 1em;
+	width: 0.625em;
 }
 
-.Card.Type0 {
-	border-image-source: url("resources/components/FlipcardBorder_0.png");
+[card]:hover {
+	transform: translateZ(1rem);
 }
 
-.Card.Type1 {
-	border-image-source: url("resources/components/FlipcardBorder_1.png");
+[card~="type0"] {
+	border-image-source: url("resources/components/CardBorder0.png");
 }
 
-.Card.Type2 {
-	border-image-source: url("resources/components/FlipcardBorder_2.png");
+[card~="type1"] {
+	border-image-source: url("resources/components/CardBorder1.png");
 }
 
-.Card.Type3 {
-	border-image-source: url("resources/components/FlipcardBorder_3.png");
+[card~="type2"] {
+	border-image-source: url("resources/components/CardBorder2.png");
+}
+
+[card~="type3"] {
+	border-image-source: url("resources/components/CardBorder3.png");
 }
 
 /* -MainMenu */
